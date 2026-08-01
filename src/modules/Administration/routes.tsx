@@ -6,6 +6,14 @@ import { settingsRoutes } from './Settings';
 import { integrationsRoutes } from './Integrations';
 import AdminLayout from '@/layouts/AdminLayout';
 
+import AdministrationDashboardPage from './Dashboard/pages/DashboardPage';
+import AdminAnalyticsPage from './Dashboard/pages/AdminAnalyticsPage';
+import SystemHealthDetailsPage from './Dashboard/pages/SystemHealthDetailsPage';
+import TopProjectsDetailsPage from './Dashboard/pages/TopProjectsDetailsPage';
+import PendingApprovalsDetailsPage from './Dashboard/pages/PendingApprovalsDetailsPage';
+import RecentActivitiesDetailsPage from './Dashboard/pages/RecentActivitiesDetailsPage';
+import NotificationsDetailsPage from './Dashboard/pages/NotificationsDetailsPage';
+
 export const administrationRoutes: RouteObject[] = [
   {
     path: 'administration',
@@ -13,7 +21,39 @@ export const administrationRoutes: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <Navigate to="organization/companies" replace />,
+        element: <Navigate to="dashboard" replace />,
+      },
+      {
+        path: 'dashboard',
+        element: <AdministrationDashboardPage />,
+      },
+      {
+        path: 'analytics',
+        element: <AdminAnalyticsPage />,
+      },
+      {
+        path: 'dashboard/analytics',
+        element: <AdminAnalyticsPage />,
+      },
+      {
+        path: 'dashboard/system-health',
+        element: <SystemHealthDetailsPage />,
+      },
+      {
+        path: 'dashboard/top-projects',
+        element: <TopProjectsDetailsPage />,
+      },
+      {
+        path: 'dashboard/pending-approvals',
+        element: <PendingApprovalsDetailsPage />,
+      },
+      {
+        path: 'dashboard/recent-activities',
+        element: <RecentActivitiesDetailsPage />,
+      },
+      {
+        path: 'dashboard/notifications',
+        element: <NotificationsDetailsPage />,
       },
       {
         path: 'access',
@@ -38,4 +78,3 @@ export const administrationRoutes: RouteObject[] = [
     ]
   }
 ];
-

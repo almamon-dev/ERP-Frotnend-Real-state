@@ -6,7 +6,7 @@ import TabHeader from '@/components/ui/tab-header';
 
 export default function NotificationsList() {
     return (
-        <div className="w-full p-4 md:p-6 bg-[#f8f9fa] min-h-screen pb-20">
+        <div className="w-full p-4 md:p-6 bg-[#f8f9fa]">
             <div className="flex items-center justify-between mb-5">
                 <div>
                     <h1 className="text-[20px] font-bold text-slate-900">Notifications</h1>

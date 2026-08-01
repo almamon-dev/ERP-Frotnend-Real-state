@@ -12,3 +12,8 @@ export type { DrawerProps } from './drawer';
 
 export { default as SidePanel } from './side-panel';
 export type { SidePanelProps } from './side-panel';
+
+export { default as NotificationModal } from './notification-modal';
+export type { NotificationModalProps, NotificationItem } from './notification-modal';
+
+

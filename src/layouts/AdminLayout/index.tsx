@@ -1,147 +1,157 @@
 import React, { useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { Bell, Search, Calendar, LayoutGrid, LogOut } from 'lucide-react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { Bell, Search, Calendar, LayoutGrid, LogOut, Mail, Menu } from 'lucide-react';
 import Sidebar from './Sidebar';
 import ModuleSelectorModal from '@/components/modals/module-selector-modal';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function AdminLayout() {
-  const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isModuleModalOpen, setIsModuleModalOpen] = useState(false);
 
-  // Derive title
-  const getPageTitle = () => {
-    const search = location.search;
-    if (location.pathname.includes('/hr')) return 'Human Resources';
-    if (location.pathname.includes('/crm')) return 'CRM & Sales Pipeline';
-    if (location.pathname.includes('/sales')) return 'Sales Management';
-    if (location.pathname.includes('/purchase')) return 'Procurement & Purchase';
-    if (location.pathname.includes('/inventory')) return 'Inventory & Stock';
-    if (location.pathname.includes('/accounting')) return 'Accounting & Finance';
-    if (location.pathname.includes('/administration')) return 'System Administration';
-    if (location.pathname.includes('/reports')) return 'Analytics & Reports';
-    return 'ERP Dashboard';
-  };
-
   return (
-    <div className="flex h-screen bg-[#f8fafc] overflow-hidden font-sans">
-      
-      {/* Sidebar Overlay (Mobile) */}
-      {isSidebarOpen && (
+    <div className="flex h-screen bg-[#F8FAFC] overflow-hidden font-sans text-slate-800 antialiased">
+
+      {/* MOBILE OVERLAY */}
+      {!isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-slate-900/50 z-20 lg:hidden"
-          onClick={() => setIsSidebarOpen(false)}
+          className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-40 lg:hidden transition-opacity"
+          onClick={() => setIsSidebarOpen(true)}
         />
       )}
 
-      {/* Main Admin Sidebar */}
+      {/* MAIN SIDEBAR */}
       <Sidebar isOpen={isSidebarOpen} />
 
-      {/* Main Content Wrapper */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        
-        {/* TOP HEADER BAR */}
-        <header className="h-16 bg-white border-b border-gray-200/80 flex items-center justify-between px-4 sm:px-6 z-10 shrink-0 shadow-2xs">
-          
-          <div className="flex items-center gap-3 sm:gap-4">
-            
-            {/* Toggle Sidebar Button */}
+      {/* MAIN CONTAINER */}
+      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
+
+        {/* TOP HEADER BAR — Matches attached screenshot */}
+        <header className="h-16 bg-white border-b border-slate-200/90 flex items-center justify-between px-4 sm:px-6 shrink-0 z-10 shadow-2xs">
+
+          {/* LEFT: MOBILE TOGGLE & GLOBAL SEARCH BAR */}
+          <div className="flex items-center gap-3 flex-1 max-w-xl">
             <button
-              className="text-slate-600 hover:text-[#008060] transition-colors p-1.5 rounded-lg hover:bg-slate-100 cursor-pointer"
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
+              title="Toggle Menu"
             >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 6h16M4 12h10M4 18h16" />
-              </svg>
+              <Menu size={20} />
             </button>
 
-            {/* 9-DOTS APP LAUNCHER BUTTON */}
+            {/* GLOBAL SEARCH */}
+            <div className="relative w-full max-w-md hidden sm:block">
+              <div className="flex items-center bg-slate-50 hover:bg-slate-100/80 focus-within:bg-white border border-slate-200 focus-within:border-indigo-500 rounded-md px-3 py-1.5 transition-all">
+                <Search size={15} className="text-slate-400 mr-2 shrink-0" />
+                <input
+                  type="text"
+                  placeholder="Search for anything..."
+                  className="bg-transparent border-none outline-none text-[12.5px] w-full text-slate-800 placeholder-slate-400 font-medium"
+                />
+                <kbd className="hidden md:inline-flex items-center gap-1 bg-white border border-slate-200 rounded px-1.5 py-0.5 text-[10px] font-mono font-semibold text-slate-400 shrink-0">
+                  Ctrl + K
+                </kbd>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: ACTION ICONS & USER PROFILE */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+
+            {/* MODULE SELECTOR (9-DOTS) */}
             <button
               onClick={() => setIsModuleModalOpen(true)}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-slate-100/90 hover:bg-slate-200/80 text-slate-700 font-medium text-[12.5px] transition-colors cursor-pointer border border-slate-200/80"
-              title="Open Module App Selector"
+              className="p-2.5 rounded-md text-slate-700hover:text-[#0D6E4F] cursor-pointer shadow-2xs flex items-center justify-center"
+              title="Switch Module"
             >
-              <LayoutGrid size={16} className="text-[#008060] shrink-0" />
-              <span className="font-semibold text-slate-700 tracking-tight">Modules</span>
+              <LayoutGrid size={21} strokeWidth={2} />
             </button>
 
-            {/* Current Page Title */}
-            <div className="hidden md:block pl-2 border-l border-slate-200">
-              <h1 className="text-[16px] font-bold text-[#0B1E43] tracking-tight">
-                {getPageTitle()}
-              </h1>
-            </div>
-
-            {/* Top Search Bar */}
-            <div className="hidden lg:flex items-center bg-slate-50 px-3.5 py-1.5 rounded-full w-[260px] border border-slate-200 focus-within:border-[#008060] focus-within:bg-white transition-colors">
-              <Search size={15} className="text-slate-400 mr-2 shrink-0" />
-              <input
-                type="text"
-                placeholder="Search system..."
-                className="bg-transparent border-none outline-none text-[12.5px] w-full text-slate-700 placeholder-slate-400 font-medium"
-              />
-            </div>
-
-          </div>
-
-          {/* Right Top Bar Items */}
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3 text-slate-500 border-r border-slate-200 pr-4">
-              <button className="p-1.5 rounded-full hover:bg-slate-100 text-slate-600 transition-colors relative" title="Notifications">
-                <Bell size={18} />
-                <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500 ring-2 ring-white" />
-              </button>
-              <button className="p-1.5 rounded-full hover:bg-slate-100 text-slate-600 transition-colors" title="Calendar">
-                <Calendar size={18} />
-              </button>
-            </div>
-
-            {/* User Profile Badge */}
-            <div className="flex items-center gap-2.5 cursor-pointer">
-              <div className="w-8 h-8 rounded-full bg-[#008060] text-white flex items-center justify-center font-bold text-[12px] shadow-2xs">
-                {user?.initials || 'AM'}
-              </div>
-              <div className="hidden sm:flex flex-col text-left">
-                <span className="text-[12.5px] font-bold text-slate-900 leading-tight">
-                  {user?.name || 'Al Mamon'}
-                </span>
-                <span className="text-[10.5px] font-semibold text-[#008060]">
-                  {user?.roleLabel || 'Administrator'}
-                </span>
-              </div>
-            </div>
-
-            {/* Logout Button */}
+            {/* CALENDAR */}
             <button
-              onClick={() => {
-                logout();
-                navigate('/web/login');
-              }}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer ml-1"
-              title="Sign Out"
+              onClick={() => navigate('/employee-portal/calendar')}
+              className="p-2 rounded-md text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer hidden sm:flex"
+              title="Calendar"
             >
-              <LogOut size={17} />
+              <Calendar size={18} />
             </button>
-          </div>
 
+            {/* NOTIFICATIONS */}
+            <button
+              className="p-2 rounded-md text-slate-600 hover:bg-slate-100 transition-colors relative cursor-pointer"
+              title="Notifications"
+            >
+              <Bell size={18} />
+              <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-rose-500 text-white font-extrabold text-[9px] flex items-center justify-center ring-2 ring-white">
+                5
+              </span>
+            </button>
+
+            {/* MESSAGES */}
+            <button
+              className="p-2 rounded-md text-slate-600 hover:bg-slate-100 transition-colors relative cursor-pointer hidden sm:flex"
+              title="Messages"
+            >
+              <Mail size={18} />
+              <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-rose-500 text-white font-extrabold text-[9px] flex items-center justify-center ring-2 ring-white">
+                5
+              </span>
+            </button>
+
+            {/* USER PROFILE DROPDOWN BADGE */}
+            <div className="flex items-center gap-3 pl-2 border-l border-slate-200">
+              <div
+                onClick={() => navigate('/employee-portal/about-me')}
+                className="flex items-center gap-2.5 cursor-pointer hover:opacity-90 transition-opacity"
+              >
+                <img
+                  src={user?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"}
+                  alt={user?.name || "Al Mamon"}
+                  className="w-8 h-8 rounded-full object-cover border border-slate-200 shadow-2xs"
+                  onError={(e: any) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80";
+                  }}
+                />
+                <div className="hidden md:flex flex-col text-left">
+                  <span className="text-[12.5px] font-bold text-slate-900 leading-tight">
+                    {user?.name || 'Al Mamon'}
+                  </span>
+                  <span className="text-[10.5px] font-medium text-slate-500">
+                    {user?.roleLabel || user?.designation || 'Administrator'}
+                  </span>
+                </div>
+              </div>
+
+              {/* LOGOUT BUTTON */}
+              <button
+                onClick={() => {
+                  logout();
+                  navigate('/web/login');
+                }}
+                className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors cursor-pointer"
+                title="Sign Out"
+              >
+                <LogOut size={17} />
+              </button>
+            </div>
+          </div>
         </header>
 
-        {/* Main Scrollable Page Content */}
-        <main className="flex-1 overflow-y-auto overflow-x-hidden bg-[#f8fafc] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        {/* MAIN SCROLLABLE CONTENT AREA */}
+        <main className="flex-1 overflow-y-auto overflow-x-hidden bg-[#F8FAFC] custom-scrollbar [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           <Outlet />
         </main>
       </div>
 
-      {/* 9-DOTS MODULE APP SELECTOR MODAL */}
-      <ModuleSelectorModal 
-        isOpen={isModuleModalOpen} 
-        onClose={() => setIsModuleModalOpen(false)} 
+      {/* 9-DOTS MODULE SELECTOR MODAL */}
+      <ModuleSelectorModal
+        isOpen={isModuleModalOpen}
+        onClose={() => setIsModuleModalOpen(false)}
       />
-
     </div>
   );
 }

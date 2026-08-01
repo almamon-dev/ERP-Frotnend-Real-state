@@ -1,201 +1,168 @@
 // ============================================================
-// ERP ROLE DEFINITIONS & DASHBOARD MAPPING
+// REAL ESTATE ERP — ROLE DEFINITIONS & DASHBOARD MAPPING
 // ============================================================
 
 export const ROLES = {
-  // Core / System Admin
-  SUPER_ADMIN: 'super_admin',
-  SYSTEM_ADMIN: 'system_admin',
-  COMPANY_ADMIN: 'company_admin',
+  // ── System Level ────────────────────────────────────────────
+  SUPER_ADMIN:          'super_admin',
+  COMPANY_ADMIN:        'company_admin',
 
-  // Executive
-  CEO: 'ceo',
-  MD: 'md',
-  DIRECTOR: 'director',
-  GM: 'gm',
-  AGM: 'agm',
+  // ── Operations Management ───────────────────────────────────
+  BRANCH_MANAGER:       'branch_manager',
+  PROJECT_MANAGER:      'project_manager',
+  CONSTRUCTION_MANAGER: 'construction_manager',
+  PROPERTY_MANAGER:     'property_manager',
+  SALES_MANAGER:        'sales_manager',
 
-  // Management
-  OPERATIONS_MANAGER: 'operations_manager',
-  HR_MANAGER: 'hr_manager',
-  FINANCE_MANAGER: 'finance_manager',
-  SALES_MANAGER: 'sales_manager',
-  PURCHASE_MANAGER: 'purchase_manager',
-  INVENTORY_MANAGER: 'inventory_manager',
-  PROJECT_MANAGER: 'project_manager',
-  IT_MANAGER: 'it_manager',
+  // ── Sales & CRM ─────────────────────────────────────────────
+  SALES_EXECUTIVE:      'sales_executive',
+  CRM_EXECUTIVE:        'crm_executive',
 
-  // Team Management
-  TEAM_LEADER: 'team_leader',
-  SUPERVISOR: 'supervisor',
-  SHIFT_IN_CHARGE: 'shift_in_charge',
+  // ── Finance & Accounts ──────────────────────────────────────
+  FINANCE_MANAGER:      'finance_manager',
+  ACCOUNTANT:           'accountant',
 
-  // Staff
-  HR_EXECUTIVE: 'hr_executive',
-  ACCOUNTANT: 'accountant',
-  SALES_EXECUTIVE: 'sales_executive',
-  PURCHASE_EXECUTIVE: 'purchase_executive',
-  INVENTORY_OFFICER: 'inventory_officer',
-  STORE_KEEPER: 'store_keeper',
-  CUSTOMER_SUPPORT_EXECUTIVE: 'customer_support_executive',
-  RECEPTIONIST: 'receptionist',
-  OFFICE_ASSISTANT: 'office_assistant',
-  STAFF: 'staff',
+  // ── HR ──────────────────────────────────────────────────────
+  HR_MANAGER:           'hr_manager',
+  HR_EXECUTIVE:         'hr_executive',
 
-  // Employee, Auditor, Guest
-  EMPLOYEE: 'employee',
-  AUDITOR: 'auditor',
-  GUEST: 'guest',
+  // ── Procurement & Inventory ─────────────────────────────────
+  PROCUREMENT_OFFICER:  'procurement_officer',
+  INVENTORY_MANAGER:    'inventory_manager',
+
+  // ── Facilities ──────────────────────────────────────────────
+  MAINTENANCE_MANAGER:  'maintenance_manager',
+
+  // ── Legal, Marketing, Support ───────────────────────────────
+  LEGAL_OFFICER:        'legal_officer',
+  MARKETING_MANAGER:    'marketing_manager',
+  MARKETING_EXECUTIVE:  'marketing_executive',
+  RECEPTIONIST:         'receptionist',
+  SUPPORT_EXECUTIVE:    'support_executive',
+  AUDITOR:              'auditor',
+
+  // ── External Portals ────────────────────────────────────────
+  CUSTOMER:             'customer',
+  PROPERTY_OWNER:       'property_owner',
+  VENDOR:               'vendor',
+  CONTRACTOR:           'contractor',
+  SUPPLIER:             'supplier',
+  TENANT:               'tenant',
 } as const;
 
 export type RoleType = typeof ROLES[keyof typeof ROLES];
 
-// Human-readable role labels
+// ── Human-Readable Labels ──────────────────────────────────────
 export const ROLE_LABELS: Record<RoleType, string> = {
-  // Core Admin
-  [ROLES.SUPER_ADMIN]: 'Super Admin',
-  [ROLES.SYSTEM_ADMIN]: 'System Administrator',
-  [ROLES.COMPANY_ADMIN]: 'Company Administrator',
-
-  // Executive
-  [ROLES.CEO]: 'Chief Executive Officer (CEO)',
-  [ROLES.MD]: 'Managing Director (MD)',
-  [ROLES.DIRECTOR]: 'Director',
-  [ROLES.GM]: 'General Manager (GM)',
-  [ROLES.AGM]: 'Assistant General Manager (AGM)',
-
-  // Management
-  [ROLES.OPERATIONS_MANAGER]: 'Operations Manager',
-  [ROLES.HR_MANAGER]: 'HR Manager',
-  [ROLES.FINANCE_MANAGER]: 'Finance Manager',
-  [ROLES.SALES_MANAGER]: 'Sales Manager',
-  [ROLES.PURCHASE_MANAGER]: 'Purchase Manager',
-  [ROLES.INVENTORY_MANAGER]: 'Inventory Manager',
-  [ROLES.PROJECT_MANAGER]: 'Project Manager',
-  [ROLES.IT_MANAGER]: 'IT Manager',
-
-  // Team Management
-  [ROLES.TEAM_LEADER]: 'Team Leader',
-  [ROLES.SUPERVISOR]: 'Supervisor',
-  [ROLES.SHIFT_IN_CHARGE]: 'Shift In-Charge',
-
-  // Staff
-  [ROLES.HR_EXECUTIVE]: 'HR Executive',
-  [ROLES.ACCOUNTANT]: 'Accountant',
-  [ROLES.SALES_EXECUTIVE]: 'Sales Executive',
-  [ROLES.PURCHASE_EXECUTIVE]: 'Purchase Executive',
-  [ROLES.INVENTORY_OFFICER]: 'Inventory Officer',
-  [ROLES.STORE_KEEPER]: 'Store Keeper',
-  [ROLES.CUSTOMER_SUPPORT_EXECUTIVE]: 'Customer Support Executive',
-  [ROLES.RECEPTIONIST]: 'Receptionist',
-  [ROLES.OFFICE_ASSISTANT]: 'Office Assistant',
-  [ROLES.STAFF]: 'Staff',
-
-  // Employee, Auditor, Guest
-  [ROLES.EMPLOYEE]: 'Employee',
-  [ROLES.AUDITOR]: 'Auditor',
-  [ROLES.GUEST]: 'Guest',
+  [ROLES.SUPER_ADMIN]:          'Super Admin',
+  [ROLES.COMPANY_ADMIN]:        'Company Admin',
+  [ROLES.BRANCH_MANAGER]:       'Branch Manager',
+  [ROLES.PROJECT_MANAGER]:      'Project Manager',
+  [ROLES.CONSTRUCTION_MANAGER]: 'Construction Manager',
+  [ROLES.PROPERTY_MANAGER]:     'Property Manager',
+  [ROLES.SALES_MANAGER]:        'Sales Manager',
+  [ROLES.SALES_EXECUTIVE]:      'Sales Executive',
+  [ROLES.CRM_EXECUTIVE]:        'CRM Executive',
+  [ROLES.FINANCE_MANAGER]:      'Finance Manager',
+  [ROLES.ACCOUNTANT]:           'Accountant',
+  [ROLES.HR_MANAGER]:           'HR Manager',
+  [ROLES.HR_EXECUTIVE]:         'HR Executive',
+  [ROLES.PROCUREMENT_OFFICER]:  'Procurement Officer',
+  [ROLES.INVENTORY_MANAGER]:    'Inventory Manager',
+  [ROLES.MAINTENANCE_MANAGER]:  'Maintenance Manager',
+  [ROLES.LEGAL_OFFICER]:        'Legal Officer',
+  [ROLES.MARKETING_MANAGER]:    'Marketing Manager',
+  [ROLES.MARKETING_EXECUTIVE]:  'Marketing Executive',
+  [ROLES.RECEPTIONIST]:         'Receptionist',
+  [ROLES.SUPPORT_EXECUTIVE]:    'Support Executive',
+  [ROLES.AUDITOR]:              'Auditor',
+  [ROLES.CUSTOMER]:             'Customer',
+  [ROLES.PROPERTY_OWNER]:       'Property Owner',
+  [ROLES.VENDOR]:               'Vendor',
+  [ROLES.CONTRACTOR]:           'Contractor',
+  [ROLES.SUPPLIER]:             'Supplier',
+  [ROLES.TENANT]:               'Tenant',
 };
 
-// Role Category Classification
+// ── Portal Groups ──────────────────────────────────────────────
 export const ROLE_CATEGORIES: Record<string, RoleType[]> = {
-  'Administration': [ROLES.SUPER_ADMIN, ROLES.SYSTEM_ADMIN, ROLES.COMPANY_ADMIN],
-  'Executive': [ROLES.CEO, ROLES.MD, ROLES.DIRECTOR, ROLES.GM, ROLES.AGM],
-  'Management': [
-    ROLES.OPERATIONS_MANAGER, ROLES.HR_MANAGER, ROLES.FINANCE_MANAGER,
-    ROLES.SALES_MANAGER, ROLES.PURCHASE_MANAGER, ROLES.INVENTORY_MANAGER,
-    ROLES.PROJECT_MANAGER, ROLES.IT_MANAGER
-  ],
-  'Team Management': [ROLES.TEAM_LEADER, ROLES.SUPERVISOR, ROLES.SHIFT_IN_CHARGE],
-  'Staff': [
-    ROLES.HR_EXECUTIVE, ROLES.ACCOUNTANT, ROLES.SALES_EXECUTIVE,
-    ROLES.PURCHASE_EXECUTIVE, ROLES.INVENTORY_OFFICER, ROLES.STORE_KEEPER,
-    ROLES.CUSTOMER_SUPPORT_EXECUTIVE, ROLES.RECEPTIONIST, ROLES.OFFICE_ASSISTANT,
-    ROLES.STAFF
-  ],
-  'Employee': [ROLES.EMPLOYEE],
-  'Audit': [ROLES.AUDITOR],
-  'Guest': [ROLES.GUEST],
+  'System':       [ROLES.SUPER_ADMIN, ROLES.COMPANY_ADMIN],
+  'Operations':   [ROLES.BRANCH_MANAGER, ROLES.PROJECT_MANAGER, ROLES.CONSTRUCTION_MANAGER, ROLES.PROPERTY_MANAGER, ROLES.SALES_MANAGER],
+  'Sales & CRM':  [ROLES.SALES_EXECUTIVE, ROLES.CRM_EXECUTIVE],
+  'Finance':      [ROLES.FINANCE_MANAGER, ROLES.ACCOUNTANT],
+  'HR':           [ROLES.HR_MANAGER, ROLES.HR_EXECUTIVE],
+  'Procurement':  [ROLES.PROCUREMENT_OFFICER, ROLES.INVENTORY_MANAGER],
+  'Facilities':   [ROLES.MAINTENANCE_MANAGER],
+  'Support':      [ROLES.LEGAL_OFFICER, ROLES.MARKETING_MANAGER, ROLES.MARKETING_EXECUTIVE, ROLES.RECEPTIONIST, ROLES.SUPPORT_EXECUTIVE, ROLES.AUDITOR],
+  'External':     [ROLES.CUSTOMER, ROLES.PROPERTY_OWNER, ROLES.VENDOR, ROLES.CONTRACTOR, ROLES.SUPPLIER, ROLES.TENANT],
 };
 
-// Role → Dashboard redirect path mapping
+// ── Dashboard / Portal Redirect Map ───────────────────────────
+// Professional, valid routes matching registered application routes
 export const ROLE_DASHBOARD_MAP: Record<RoleType, string> = {
-  [ROLES.SUPER_ADMIN]: '/dashboard',
-  [ROLES.SYSTEM_ADMIN]: '/administration/monitoring/dashboard',
-  [ROLES.COMPANY_ADMIN]: '/administration/organization/companies',
+  // System Administration -> /admin
+  [ROLES.SUPER_ADMIN]:          '/admin',
+  [ROLES.COMPANY_ADMIN]:        '/dashboard',
 
-  [ROLES.CEO]: '/dashboard',
-  [ROLES.MD]: '/dashboard',
-  [ROLES.DIRECTOR]: '/dashboard',
-  [ROLES.GM]: '/dashboard',
-  [ROLES.AGM]: '/dashboard',
+  // Employee & Operational Management -> /dashboard or /hr/portal
+  [ROLES.BRANCH_MANAGER]:       '/dashboard',
+  [ROLES.PROJECT_MANAGER]:      '/dashboard',
+  [ROLES.CONSTRUCTION_MANAGER]: '/dashboard',
+  [ROLES.PROPERTY_MANAGER]:     '/dashboard',
+  [ROLES.SALES_MANAGER]:        '/dashboard',
+  [ROLES.SALES_EXECUTIVE]:      '/dashboard',
+  [ROLES.CRM_EXECUTIVE]:        '/dashboard',
+  [ROLES.FINANCE_MANAGER]:      '/dashboard',
+  [ROLES.ACCOUNTANT]:           '/dashboard',
+  [ROLES.HR_MANAGER]:           '/hr/portal',
+  [ROLES.HR_EXECUTIVE]:         '/hr/portal',
+  [ROLES.PROCUREMENT_OFFICER]:  '/dashboard',
+  [ROLES.INVENTORY_MANAGER]:    '/dashboard',
+  [ROLES.MAINTENANCE_MANAGER]:  '/dashboard',
+  [ROLES.LEGAL_OFFICER]:        '/dashboard',
+  [ROLES.MARKETING_MANAGER]:    '/dashboard',
+  [ROLES.MARKETING_EXECUTIVE]:  '/dashboard',
+  [ROLES.RECEPTIONIST]:         '/dashboard',
+  [ROLES.SUPPORT_EXECUTIVE]:    '/dashboard',
+  [ROLES.AUDITOR]:              '/dashboard',
 
-  [ROLES.OPERATIONS_MANAGER]: '/dashboard',
-  [ROLES.HR_MANAGER]: '/hr/dashboard',
-  [ROLES.FINANCE_MANAGER]: '/accounting/financial-reports',
-  [ROLES.SALES_MANAGER]: '/sales/orders',
-  [ROLES.PURCHASE_MANAGER]: '/purchase/orders',
-  [ROLES.INVENTORY_MANAGER]: '/inventory/stock',
-  [ROLES.PROJECT_MANAGER]: '/dashboard',
-  [ROLES.IT_MANAGER]: '/administration/settings/general',
-
-  [ROLES.TEAM_LEADER]: '/employee-portal/dashboard',
-  [ROLES.SUPERVISOR]: '/employee-portal/dashboard',
-  [ROLES.SHIFT_IN_CHARGE]: '/hr/shifts',
-
-  [ROLES.HR_EXECUTIVE]: '/hr/employees',
-  [ROLES.ACCOUNTANT]: '/accounting/journal-entries',
-  [ROLES.SALES_EXECUTIVE]: '/sales/orders',
-  [ROLES.PURCHASE_EXECUTIVE]: '/purchase/orders',
-  [ROLES.INVENTORY_OFFICER]: '/inventory/stock',
-  [ROLES.STORE_KEEPER]: '/inventory/warehouses',
-  [ROLES.CUSTOMER_SUPPORT_EXECUTIVE]: '/support/tickets',
-  [ROLES.RECEPTIONIST]: '/hr/employees',
-  [ROLES.OFFICE_ASSISTANT]: '/employee-portal/dashboard',
-  [ROLES.STAFF]: '/employee-portal/dashboard',
-
-  [ROLES.EMPLOYEE]: '/employee-portal/dashboard',
-  [ROLES.AUDITOR]: '/reports/dashboard-analytics',
-  [ROLES.GUEST]: '/employee-portal/dashboard',
+  // External Portals -> /employee-portal/dashboard or /dashboard
+  [ROLES.CUSTOMER]:             '/employee-portal/dashboard',
+  [ROLES.PROPERTY_OWNER]:       '/dashboard',
+  [ROLES.VENDOR]:               '/dashboard',
+  [ROLES.CONTRACTOR]:           '/dashboard',
+  [ROLES.SUPPLIER]:             '/dashboard',
+  [ROLES.TENANT]:               '/employee-portal/dashboard',
 };
 
-// Module level access per role
+// ── Module Access per Role ─────────────────────────────────────
 export const ROLE_MODULE_ACCESS: Record<RoleType, string[]> = {
-  [ROLES.SUPER_ADMIN]: ['*'],
-  [ROLES.SYSTEM_ADMIN]: ['administration'],
-  [ROLES.COMPANY_ADMIN]: ['administration', 'hr', 'accounting', 'sales', 'purchase', 'inventory'],
-
-  [ROLES.CEO]: ['dashboard', 'reports', 'hr', 'crm', 'sales', 'accounting'],
-  [ROLES.MD]: ['dashboard', 'reports', 'hr', 'crm', 'sales', 'accounting'],
-  [ROLES.DIRECTOR]: ['dashboard', 'reports', 'hr', 'crm', 'sales', 'accounting'],
-  [ROLES.GM]: ['dashboard', 'reports', 'hr', 'sales', 'accounting'],
-  [ROLES.AGM]: ['dashboard', 'reports', 'hr', 'sales'],
-
-  [ROLES.OPERATIONS_MANAGER]: ['dashboard', 'inventory', 'purchase', 'sales'],
-  [ROLES.HR_MANAGER]: ['hr', 'reports'],
-  [ROLES.FINANCE_MANAGER]: ['accounting', 'reports'],
-  [ROLES.SALES_MANAGER]: ['sales', 'crm', 'reports'],
-  [ROLES.PURCHASE_MANAGER]: ['purchase', 'inventory'],
-  [ROLES.INVENTORY_MANAGER]: ['inventory', 'purchase'],
-  [ROLES.PROJECT_MANAGER]: ['dashboard', 'reports'],
-  [ROLES.IT_MANAGER]: ['administration'],
-
-  [ROLES.TEAM_LEADER]: ['ess', 'hr'],
-  [ROLES.SUPERVISOR]: ['ess', 'hr'],
-  [ROLES.SHIFT_IN_CHARGE]: ['hr'],
-
-  [ROLES.HR_EXECUTIVE]: ['hr'],
-  [ROLES.ACCOUNTANT]: ['accounting'],
-  [ROLES.SALES_EXECUTIVE]: ['sales', 'crm'],
-  [ROLES.PURCHASE_EXECUTIVE]: ['purchase'],
-  [ROLES.INVENTORY_OFFICER]: ['inventory'],
-  [ROLES.STORE_KEEPER]: ['inventory'],
-  [ROLES.CUSTOMER_SUPPORT_EXECUTIVE]: ['support', 'crm'],
-  [ROLES.RECEPTIONIST]: ['hr'],
-  [ROLES.OFFICE_ASSISTANT]: ['ess'],
-  [ROLES.STAFF]: ['ess'],
-
-  [ROLES.EMPLOYEE]: ['ess'],
-  [ROLES.AUDITOR]: ['reports', 'accounting'],
-  [ROLES.GUEST]: ['ess'],
+  [ROLES.SUPER_ADMIN]:          ['*'],
+  [ROLES.COMPANY_ADMIN]:        ['dashboard', 'hr', 'finance', 'sales', 'crm', 'inventory', 'reports'],
+  [ROLES.BRANCH_MANAGER]:       ['dashboard', 'sales', 'hr', 'reports'],
+  [ROLES.PROJECT_MANAGER]:      ['dashboard', 'projects', 'construction', 'reports'],
+  [ROLES.CONSTRUCTION_MANAGER]: ['dashboard', 'construction', 'inventory'],
+  [ROLES.PROPERTY_MANAGER]:     ['dashboard', 'properties', 'maintenance'],
+  [ROLES.SALES_MANAGER]:        ['dashboard', 'sales', 'crm', 'reports'],
+  [ROLES.SALES_EXECUTIVE]:      ['sales', 'crm'],
+  [ROLES.CRM_EXECUTIVE]:        ['crm'],
+  [ROLES.FINANCE_MANAGER]:      ['finance', 'reports'],
+  [ROLES.ACCOUNTANT]:           ['finance'],
+  [ROLES.HR_MANAGER]:           ['hr', 'reports'],
+  [ROLES.HR_EXECUTIVE]:         ['hr'],
+  [ROLES.PROCUREMENT_OFFICER]:  ['procurement', 'inventory'],
+  [ROLES.INVENTORY_MANAGER]:    ['inventory'],
+  [ROLES.MAINTENANCE_MANAGER]:  ['maintenance'],
+  [ROLES.LEGAL_OFFICER]:        ['legal', 'documents'],
+  [ROLES.MARKETING_MANAGER]:    ['marketing', 'crm'],
+  [ROLES.MARKETING_EXECUTIVE]:  ['marketing'],
+  [ROLES.RECEPTIONIST]:         ['crm', 'support'],
+  [ROLES.SUPPORT_EXECUTIVE]:    ['support'],
+  [ROLES.AUDITOR]:              ['reports', 'finance'],
+  [ROLES.CUSTOMER]:             ['customer-portal'],
+  [ROLES.PROPERTY_OWNER]:       ['owner-portal'],
+  [ROLES.VENDOR]:               ['vendor-portal'],
+  [ROLES.CONTRACTOR]:           ['vendor-portal'],
+  [ROLES.SUPPLIER]:             ['vendor-portal'],
+  [ROLES.TENANT]:               ['tenant-portal'],
 };

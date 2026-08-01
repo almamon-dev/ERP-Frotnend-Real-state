@@ -117,7 +117,7 @@ export default function Select({
                 {({ open }) => (
                     <div className="relative w-full">
                         <Listbox.Button className={cn(
-                            "relative w-full py-1.5 cursor-pointer rounded-[3px] border border-[#d1d1d1] bg-white pr-7 text-left text-[12.5px] font-medium text-[#202223] outline-none focus:outline-none focus:ring-0 focus-visible:outline-none focus:border-[#008060] transition-colors flex items-center shadow-none",
+                            "relative w-full py-1.5 cursor-pointer rounded-[3px] border border-[#d1d1d1] bg-white pr-7 text-left text-[12.5px] font-medium text-[#202223] outline-none focus:outline-none focus:ring-0 focus-visible:outline-none focus:border-[#d1d1d1] active:border-[#d1d1d1] transition-colors flex items-center shadow-none",
                             Icon ? "pl-8" : "pl-2.5"
                         )}>
                             {Icon && (

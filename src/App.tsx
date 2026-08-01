@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { authRoutes } from './modules/Auth';
-import { dashboardRoutes } from './modules/Dashboard/routes';
+import { dashboardRoutes } from './modules/MainDashboard/routes';
 import { administrationRoutes } from './modules/Administration';
 import { crmRoutes } from './modules/CRM';
 import { hrRoutes } from './modules/HR';
@@ -14,7 +14,7 @@ import { aIRoutes } from './modules/AI';
 import { employeeSelfServiceRoutes } from './modules/EmployeeSelfService';
 import { supportRoutes } from './modules/Support/routes';
 import { adminSuiteRoutes } from './modules/AdminSuite/routes';
-import ModulesSelectorPage from './modules/Dashboard/pages/ModulesSelectorPage';
+import ModulesSelectorPage from './modules/MainDashboard/pages/ModulesSelectorPage';
 import RoleBasedRedirect from './components/auth/RoleBasedRedirect';
 import { AuthProvider } from './contexts/AuthContext';
 
