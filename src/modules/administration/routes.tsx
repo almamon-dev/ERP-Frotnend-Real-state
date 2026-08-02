@@ -1,0 +1,102 @@
+import { RouteObject, Navigate } from 'react-router-dom';
+import { dashboardRoutes } from './Dashboard';
+import { analyticsRoutes } from './Analytics';
+import { reportsRoutes } from './Reports';
+import { accessManagementRoutes } from './UserManagement/AccessManagement_routes';
+import { organizationRoutes } from './CompanySetup';
+import { masterDataRoutes } from './MasterData';
+import { securityRoutes } from './Security';
+import { settingsRoutes } from './Settings';
+import { integrationsRoutes } from './Integration';
+import AdminLayout from '@/shared/layouts/AdminLayout';
+
+import CompaniesPage from './CompanySetup/Companies/pages/CompaniesPage';
+import BranchesPage from './CompanySetup/Branches/pages/BranchesPage';
+import DepartmentsPage from './CompanySetup/Departments/pages/DepartmentsPage';
+import DesignationsPage from './CompanySetup/Designations/pages/DesignationsPage';
+import TeamsPage from './CompanySetup/Teams/pages/TeamsPage';
+import MasterDataPage from './MasterData/pages/MasterDataPage';
+
+export const administrationRoutes: RouteObject[] = [
+  {
+    path: 'admin',
+    element: <AdminLayout />,
+    children: [
+      {
+        path: 'reports/*',
+        children: reportsRoutes,
+      },
+      {
+        path: 'core/companies',
+        element: <CompaniesPage />,
+      },
+      {
+        path: 'core/branches',
+        element: <BranchesPage />,
+      },
+      {
+        path: 'core/departments',
+        element: <DepartmentsPage />,
+      },
+      {
+        path: 'core/designations',
+        element: <DesignationsPage />,
+      },
+      {
+        path: 'core/teams',
+        element: <TeamsPage />,
+      },
+      {
+        path: 'core/master-data',
+        element: <MasterDataPage />,
+      },
+    ],
+  },
+  {
+    path: 'administration',
+    element: <AdminLayout />,
+    children: [
+      {
+        index: true,
+        element: <Navigate to="dashboard" replace />,
+      },
+      {
+        path: 'analytics/*',
+        children: analyticsRoutes,
+      },
+      {
+        path: 'reports/*',
+        children: reportsRoutes,
+      },
+      {
+        path: 'dashboard/*',
+        children: dashboardRoutes,
+      },
+      {
+        path: 'master-data/*',
+        children: masterDataRoutes,
+      },
+      {
+        path: 'access',
+        children: accessManagementRoutes,
+      },
+      {
+        path: 'organization',
+        children: organizationRoutes,
+      },
+      {
+        path: 'security',
+        children: securityRoutes,
+      },
+      {
+        path: 'settings',
+        children: settingsRoutes,
+      },
+      {
+        path: 'integrations',
+        children: integrationsRoutes,
+      },
+    ]
+  }
+];
+

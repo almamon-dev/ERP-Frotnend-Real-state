@@ -1,22 +1,22 @@
 import React from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { authRoutes } from './modules/Auth';
-import { dashboardRoutes } from './modules/MainDashboard/routes';
-import { administrationRoutes } from './modules/Administration';
-import { crmRoutes } from './modules/CRM';
-import { hrRoutes } from './modules/HR';
-import { salesRoutes } from './modules/Sales';
-import { purchaseRoutes } from './modules/Purchase';
-import { inventoryRoutes } from './modules/Inventory';
-import { accountingRoutes } from './modules/Accounting';
-import { reportsRoutes } from './modules/Reports';
-import { aIRoutes } from './modules/AI';
-import { employeeSelfServiceRoutes } from './modules/EmployeeSelfService';
-import { supportRoutes } from './modules/Support/routes';
-import { adminSuiteRoutes } from './modules/AdminSuite/routes';
-import ModulesSelectorPage from './modules/MainDashboard/pages/ModulesSelectorPage';
-import RoleBasedRedirect from './components/auth/RoleBasedRedirect';
-import { AuthProvider } from './contexts/AuthContext';
+import { authRoutes } from './modules/auth';
+import { dashboardRoutes } from './modules/dashboard/routes';
+import { administrationRoutes } from './modules/administration';
+import { crmRoutes } from './modules/crm';
+import { hrRoutes } from './modules/hr';
+import { salesRoutes } from './modules/sales';
+import { purchaseRoutes } from './modules/purchase';
+import { inventoryRoutes } from './modules/inventory';
+import { accountingRoutes } from './modules/accounting';
+import { reportsRoutes } from './modules/reports';
+import { aIRoutes } from './modules/ai';
+import { employeeSelfServiceRoutes } from './modules/ess';
+import { supportRoutes } from './modules/support/routes';
+import ModulesSelectorPage from './modules/dashboard/pages/ModulesSelectorPage';
+import RoleBasedRedirect from './shared/components/auth/RoleBasedRedirect';
+import { AuthProvider } from './shared/context/contexts/AuthContext';
+import { MasterDataProvider } from './shared/context/MasterDataContext';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +25,6 @@ const router = createBrowserRouter([
     element: <RoleBasedRedirect />,
   },
   ...authRoutes,
-  ...adminSuiteRoutes,
   ...dashboardRoutes,
   ...administrationRoutes,
   ...crmRoutes,
@@ -54,9 +53,11 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    // AuthProvider wraps everything so any component can call useAuth()
     <AuthProvider>
-      <RouterProvider router={router} />
+      <MasterDataProvider>
+        <RouterProvider router={router} />
+      </MasterDataProvider>
     </AuthProvider>
   );
 }
+
