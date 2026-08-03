@@ -70,10 +70,11 @@ export const adminMasterNavigation: SidebarNavItem[] = [
     group: 'User Management',
     icon: Users,
     items: [
-      { name: 'Users', path: '/admin/users/list' },
-      { name: 'Roles', path: '/admin/users/roles' },
-      { name: 'Login History', path: '/admin/users/login-history' },
-      { name: 'Activity Logs', path: '/admin/users/activity-logs' },
+      { name: 'Dashboard', path: '/administration/access/dashboard' },
+      { name: 'Users', path: '/administration/access/users' },
+      { name: 'Login History', path: '/administration/access/login-history' },
+      { name: 'Activity Logs', path: '/administration/access/activity-logs' },
+      { name: 'Reports', path: '/administration/access/reports' },
     ],
   },
   {
@@ -81,7 +82,7 @@ export const adminMasterNavigation: SidebarNavItem[] = [
     group: 'Role & Permissions',
     icon: Key,
     items: [
-      { name: 'Permissions', path: '/admin/users/permissions' },
+      { name: 'Roles & Permissions', path: '/admin/users/roles' },
       { name: 'User Groups', path: '/admin/users/groups' },
     ],
   },
@@ -103,7 +104,7 @@ export const adminMasterNavigation: SidebarNavItem[] = [
     icon: FolderKanban,
     items: [
       { name: 'Projects', path: '/admin/projects/list' },
-      { name: 'Milestones', path: '/admin/projects/milestones' },
+      { name: 'Buildings & Floors', path: '/admin/projects/buildings' },
       { name: 'Progress Reports', path: '/admin/projects/progress' },
     ],
   },
@@ -114,6 +115,7 @@ export const adminMasterNavigation: SidebarNavItem[] = [
     items: [
       { name: 'Properties', path: '/admin/property/list' },
       { name: 'Units', path: '/admin/property/units' },
+      { name: 'Amenities & Parking', path: '/admin/property/amenities' },
       { name: 'Maintenance', path: '/admin/property/maintenance' },
     ],
   },

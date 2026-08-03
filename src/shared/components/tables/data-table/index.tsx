@@ -1,7 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
-import {
-    Search, SlidersHorizontal, RotateCcw, Trash2, X
-} from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 import TablePagination from '@/shared/components/tables/table-pagination';
 import EmptyState from '@/shared/components/tables/empty-state';
 import TableSearch from '@/shared/components/tables/table-search';
@@ -79,7 +76,7 @@ export default function DataTable<T extends Record<string, any>>({
 
     // Pagination Logic
     const totalItems = filteredData.length;
-    const totalPages = Math.ceil(totalItems / perPage);
+    const totalPages = Math.ceil(totalItems / perPage) || 1;
     const startIndex = (currentPage - 1) * perPage;
     const paginatedData = filteredData.slice(startIndex, startIndex + perPage);
 
@@ -104,9 +101,9 @@ export default function DataTable<T extends Record<string, any>>({
     };
 
     return (
-        <div className="bg-white rounded-lg border border-slate-200/80 shadow-2xs relative z-10">
-            <div className="animate-in fade-in duration-300">
-                {/* Toolbar (Polaris Style) */}
+        <div className="bg-white rounded-[6px] border border-[#E5E7EB] shadow-2xs relative z-10 overflow-hidden font-sans">
+            <div className="animate-in fade-in duration-200">
+                {/* Toolbar */}
                 <TableToolbar
                     selectedCount={selectedIds.length}
                     totalCount={totalItems}
@@ -119,15 +116,12 @@ export default function DataTable<T extends Record<string, any>>({
                         onChange={setSearch}
                         placeholder={searchPlaceholder}
                     />
-                    <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-1.5 flex-wrap">
                         {customHeaderActions}
                         <TableFilter
                             dateValue={dateFilter}
                             onDateChange={handleDateChange}
                         />
-
-                        <div className="w-[1px] h-4 bg-slate-200 mx-1"></div>
-
                         <TableColumnToggle
                             columns={columns}
                             visibleColumns={visibleColumns}
@@ -137,33 +131,36 @@ export default function DataTable<T extends Record<string, any>>({
                 </TableToolbar>
 
                 {/* Filter Content Area */}
-                {showFilters && filterContent && (
-                    <div className="p-4 border-b border-slate-200/80 bg-slate-50/50 animate-in slide-in-from-top-2 duration-200">
+                {filterContent && (
+                    <div className="p-3.5 border-b border-[#E5E7EB] bg-[#F9FAFB]">
                         {filterContent}
                     </div>
                 )}
 
                 {/* Data Table */}
                 <div className="overflow-x-auto custom-scrollbar">
-                    <table className="w-full text-left border-collapse">
+                    <table className="w-full text-left border-collapse text-xs">
                         <thead>
-                            <tr className="bg-[#F8FAFC] border-b border-slate-200 text-[11.5px] font-semibold text-slate-600 tracking-tight">
-                                <th className="px-2.5 py-1.5 w-[36px] text-center">
+                            <tr className="bg-[#F9FAFB] text-slate-700 font-bold border-b border-[#E5E7EB] text-[12px] uppercase tracking-wider">
+                                <th className="py-3.5 px-4 w-12 text-center">
                                     <div className="flex items-center justify-center">
                                         <input
                                             type="checkbox"
                                             checked={selectedIds.length === paginatedData.length && paginatedData.length > 0}
                                             onChange={toggleSelectAll}
-                                            className="w-3.5 h-3.5 text-indigo-600 border-slate-300 rounded-xs focus:ring-indigo-500 cursor-pointer" />
+                                            className="w-4 h-4 rounded border-[#D1D5DB] text-[#006837] focus:ring-0 accent-[#006837] cursor-pointer"
+                                        />
                                     </div>
                                 </th>
                                 {columns.map(col => visibleColumns.includes(col.id) && (
-                                    <th key={col.id} className={`px-3 py-1.5 ${col.id === 'actions' ? 'text-right pr-3' : 'text-left'}`}>{col.label}</th>
+                                    <th key={col.id} className={`py-3.5 px-4 ${col.id === 'actions' ? 'text-right pr-4' : 'text-left'}`}>
+                                        {col.label}
+                                    </th>
                                 ))}
-                                {actions && <th className="px-3 py-1.5 text-right pr-3">Actions</th>}
+                                {actions && <th className="py-3.5 px-4 text-right pr-4">Actions</th>}
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100/80">
+                        <tbody className="divide-y divide-[#F3F4F6] text-[#111827]">
                             {paginatedData.length === 0 ? (
                                 <tr>
                                     <td colSpan={columns.length + (actions ? 2 : 1)} className="p-0">
@@ -175,18 +172,19 @@ export default function DataTable<T extends Record<string, any>>({
                                     const id = keyExtractor(item);
                                     const isSelected = selectedIds.includes(id);
                                     return (
-                                        <tr key={id} className={`transition-colors group ${isSelected ? 'bg-indigo-50/40' : 'hover:bg-slate-50/60'}`}>
-                                            <td className="px-2.5 py-1.5 whitespace-nowrap text-center">
+                                        <tr key={id} className={`transition-colors h-[52px] ${isSelected ? 'bg-emerald-50/30' : 'hover:bg-[#F9FAFB]'}`}>
+                                            <td className="py-3 px-4 whitespace-nowrap text-center">
                                                 <div className="flex items-center justify-center">
                                                     <input
                                                         type="checkbox"
                                                         checked={isSelected}
                                                         onChange={() => toggleSelect(id)}
-                                                        className="w-3.5 h-3.5 text-indigo-600 border-slate-300 rounded-xs focus:ring-indigo-500 cursor-pointer" />
+                                                        className="w-4 h-4 rounded border-[#D1D5DB] text-[#006837] focus:ring-0 accent-[#006837] cursor-pointer"
+                                                    />
                                                 </div>
                                             </td>
                                             {columns.map(col => visibleColumns.includes(col.id) && (
-                                                <td key={col.id} className={`px-3 py-1.5 whitespace-nowrap text-[12px] text-slate-700 font-medium ${col.id === 'actions' ? 'text-right pr-3 ml-auto' : 'text-left'}`}>
+                                                <td key={col.id} className={`py-3 px-4 whitespace-nowrap text-[13px] text-[#111827] font-medium ${col.id === 'actions' ? 'text-right pr-4 ml-auto' : 'text-left'}`}>
                                                     {col.id === 'actions' ? (
                                                         <div className="flex justify-end items-center ml-auto w-full">
                                                             {col.render ? col.render(item) : item[col.id]}
@@ -197,7 +195,7 @@ export default function DataTable<T extends Record<string, any>>({
                                                 </td>
                                             ))}
                                             {actions && (
-                                                <td className="px-3 py-1.5 whitespace-nowrap text-right pr-3">
+                                                <td className="py-3 px-4 whitespace-nowrap text-right pr-4">
                                                     <div className="flex justify-end items-center ml-auto w-full">
                                                         {actions(item)}
                                                     </div>

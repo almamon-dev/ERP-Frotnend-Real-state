@@ -7,22 +7,34 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   categoryName: string;
+  initialData?: any;
   onSave: (item: any) => void;
 }
 
-export const MasterDataFormModal: React.FC<Props> = ({ isOpen, onClose, categoryName, onSave }) => {
-  const [name, setName] = useState('');
-  const [code, setCode] = useState('');
+export const MasterDataFormModal: React.FC<Props> = ({ isOpen, onClose, categoryName, initialData, onSave }) => {
+  const [name, setName] = useState(initialData?.name || '');
+  const [code, setCode] = useState(initialData?.code || '');
+
+  React.useEffect(() => {
+    setName(initialData?.name || '');
+    setCode(initialData?.code || '');
+  }, [initialData, isOpen]);
 
   const handleSave = () => {
     if (!name) return;
-    onSave({ id: Date.now().toString(), code: code || `MD-${Date.now()}`, name, status: 'Active' });
-    setName(''); setCode('');
+    onSave({
+      id: initialData?.id || Date.now().toString(),
+      code: code || `MD-${Date.now()}`,
+      name,
+      status: initialData?.status || 'Active',
+    });
+    setName('');
+    setCode('');
     onClose();
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title={`Add ${categoryName} Option`}>
+    <Modal isOpen={isOpen} onClose={onClose} title={initialData ? `Edit ${categoryName} Option` : `Add ${categoryName} Option`}>
       <div className="space-y-4 p-2">
         <Input label="Code" value={code} onChange={(e) => setCode(e.target.value)} placeholder="Auto-generated if empty" />
         <Input label="Name *" value={name} onChange={(e) => setName(e.target.value)} placeholder="Option Name" />

@@ -54,8 +54,23 @@ export default function Select({
         }))
         .filter(opt => opt.id !== undefined);
 
+    const rawOptions = options.length > 0 ? options : childOptions;
+    const finalOptions = rawOptions.map((opt: any) => {
+        if (typeof opt === 'object' && opt !== null) {
+            const idVal = opt.id !== undefined ? opt.id : (opt.value !== undefined ? opt.value : '');
+            const nameVal = opt.name !== undefined ? opt.name : (opt.label !== undefined ? opt.label : String(idVal));
+            return {
+                ...opt,
+                id: idVal,
+                value: opt.value !== undefined ? opt.value : idVal,
+                name: nameVal,
+                label: nameVal
+            };
+        }
+        return { id: opt, value: opt, name: String(opt), label: String(opt) };
+    });
+
     const [searchQuery, setSearchQuery] = useState('');
-    const finalOptions = options.length > 0 ? options : childOptions;
 
     // Filter options based on search query
     const filteredOptions = finalOptions.filter(opt =>
@@ -116,7 +131,7 @@ export default function Select({
     return (
         <div className={cn("w-full shrink-0", className, disabled && "opacity-60 cursor-not-allowed pointer-events-none")}>
             {label && (
-                <label className="block text-[12px] font-semibold text-slate-700 mb-1">
+                <label className="block text-[13px] font-semibold text-slate-700 mb-1">
                     {label}
                 </label>
             )}
@@ -124,15 +139,15 @@ export default function Select({
                 {({ open }) => (
                     <div className="relative w-full">
                         <Listbox.Button className={cn(
-                            "relative w-full py-1.5 cursor-pointer rounded-[3px] border border-[#d1d1d1] bg-white pr-7 text-left text-[12.5px] font-medium text-[#202223] outline-none focus:outline-none focus:ring-0 focus-visible:outline-none focus:border-[#d1d1d1] active:border-[#d1d1d1] transition-colors flex items-center shadow-none",
-                            Icon ? "pl-8" : "pl-2.5"
+                            "relative w-full py-2 cursor-pointer rounded-[4px] border border-[#d1d1d1] bg-white pr-7 text-left text-[13px] font-medium text-[#202223] outline-none focus:outline-none focus:ring-0 focus-visible:outline-none focus:border-[#d1d1d1] active:border-[#d1d1d1] transition-colors flex items-center shadow-none",
+                            Icon ? "pl-8" : "pl-3"
                         )}>
                             {Icon && (
                                 <span className="pointer-events-none absolute inset-y-0 left-0 pl-2.5 flex items-center text-[#8c9196]">
                                     <Icon size={14} aria-hidden="true" />
                                 </span>
                             )}
-                            <span className={cn("block truncate w-full text-[12.5px] leading-tight text-slate-800", multiple && "break-words whitespace-normal")}>
+                            <span className={cn("block truncate w-full text-[13px] leading-tight text-slate-800", multiple && "break-words whitespace-normal")}>
                                 {getSelectedDisplay()}
                             </span>
                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-slate-400">

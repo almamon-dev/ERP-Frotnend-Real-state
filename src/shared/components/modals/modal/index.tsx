@@ -72,7 +72,7 @@ export default function Modal({
       {/* Modal Content Card */}
       <div
         className={cn(
-          "relative bg-white rounded-xl shadow-2xl w-full flex flex-col overflow-hidden max-h-[88vh] z-10 transform transition-all animate-in fade-in zoom-in-95 duration-200",
+          "relative bg-white rounded-[3px] shadow-2xl w-full flex flex-col overflow-visible max-h-[88vh] z-10 transform transition-all animate-in fade-in zoom-in-95 duration-200",
           sizeClasses[size],
           className
         )}
@@ -80,7 +80,7 @@ export default function Modal({
       >
         {/* Header */}
         {(title || showCloseButton) && (
-          <div className="flex items-center justify-between px-5 py-3 border-b border-slate-100 shrink-0 rounded-t-xl bg-white">
+          <div className="flex items-center justify-between px-5 py-3 border-b border-slate-100 shrink-0 rounded-t-[3px] bg-white">
             <div className="flex-1">
               {title && (
                 typeof title === 'string' ? (
@@ -105,13 +105,13 @@ export default function Modal({
         )}
 
         {/* Body Container with clean internal scrollbar */}
-        <div className="p-5 overflow-y-auto custom-scrollbar flex-1">
+        <div className="p-5 overflow-visible custom-scrollbar flex-1">
           {children}
         </div>
 
         {/* Footer */}
         {footer && (
-          <div className="px-5 py-3 border-t border-slate-100 bg-slate-50 shrink-0 flex items-center justify-end gap-3 rounded-b-xl">
+          <div className="px-5 py-3 border-t border-slate-100 bg-slate-50 shrink-0 flex items-center justify-end gap-3 rounded-b-[3px]">
             {footer}
           </div>
         )}

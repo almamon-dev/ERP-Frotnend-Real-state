@@ -1,7 +1,7 @@
 import { dashboardNavigation } from './Dashboard';
 import { analyticsNavigation } from './Analytics';
 import { reportsNavigation } from './Reports';
-import { accessManagementNavigation } from './UserManagement/AccessManagement_navigation';
+import { userManagementNavigation } from './UserManagement';
 import { organizationNavigation } from './CompanySetup';
 import { masterDataNavigation } from './MasterData';
 import { securityNavigation } from './Security';
@@ -35,9 +35,9 @@ export const administrationSidebar = [
     items: masterDataNavigation
   },
   {
-    title: 'Access Management',
-    icon: 'ShieldAlert',
-    items: accessManagementNavigation
+    title: 'User Management',
+    icon: 'Users',
+    items: userManagementNavigation
   },
   {
     title: 'Security',

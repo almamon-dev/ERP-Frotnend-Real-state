@@ -1,0 +1,8 @@
+import { PropertyItem } from '../types/properties';
+
+export const initialProperties: PropertyItem[] = [
+  { id: '1', propertyCode: 'PRP-101', name: 'Gulshan Crown Plaza Tower', location: 'Gulshan Avenue, Dhaka', propertyType: 'Commercial Building', landArea: '18 Katha', builtUpArea: '1,45,000 Sq Ft', totalFloors: 'B3 + G + 22 Floors', totalUnits: 48, availableUnits: 12, occupancyRate: '75%', rajukApprovalNo: 'RAJUK-2023-8891', marketValuation: '৳ 210.0 Cr', completionYear: '2024', status: 'Active' },
+  { id: '2', propertyCode: 'PRP-102', name: 'Banani Imperial Heights', location: 'Road 11, Banani, Dhaka', propertyType: 'Residential Complex', landArea: '14 Katha', builtUpArea: '98,000 Sq Ft', totalFloors: 'B2 + G + 16 Floors', totalUnits: 60, availableUnits: 8, occupancyRate: '86%', rajukApprovalNo: 'RAJUK-2022-4102', marketValuation: '৳ 165.0 Cr', completionYear: '2023', status: 'Active' },
+  { id: '3', propertyCode: 'PRP-103', name: 'Uttara Mega Shopping Mall', location: 'Sector 3, Uttara, Dhaka', propertyType: 'Shopping Mall', landArea: '25 Katha', builtUpArea: '2,10,000 Sq Ft', totalFloors: 'B2 + G + 8 Floors', totalUnits: 120, availableUnits: 34, occupancyRate: '71%', rajukApprovalNo: 'RAJUK-2024-1109', marketValuation: '৳ 320.0 Cr', completionYear: '2025', status: 'Active' },
+  { id: '4', propertyCode: 'PRP-104', name: 'Dhanmondi Lakeview Condos', location: 'Road 27, Dhanmondi', propertyType: 'Residential Complex', landArea: '12 Katha', builtUpArea: '65,000 Sq Ft', totalFloors: 'B1 + G + 12 Floors', totalUnits: 36, availableUnits: 2, occupancyRate: '94%', rajukApprovalNo: 'RAJUK-2021-9920', marketValuation: '৳ 98.0 Cr', completionYear: '2022', status: 'Active' },
+];

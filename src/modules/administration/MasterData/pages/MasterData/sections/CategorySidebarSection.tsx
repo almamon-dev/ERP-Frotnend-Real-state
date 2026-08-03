@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const CategorySidebarSection: React.FC<Props> = ({ categories, selectedCategory, onSelectCategory }) => (
-  <div className="w-full md:w-64 bg-white rounded-lg border border-slate-200 p-3 space-y-1">
+  <div className="w-full md:w-64 bg-white rounded-lg border border-slate-200 p-3 space-y-1 h-fit">
     <h3 className="text-[12px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-2 flex items-center gap-1.5">
       <Database size={14} /> Data Categories
     </h3>

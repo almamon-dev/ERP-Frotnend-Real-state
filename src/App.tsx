@@ -13,6 +13,9 @@ import { reportsRoutes } from './modules/reports';
 import { aIRoutes } from './modules/ai';
 import { employeeSelfServiceRoutes } from './modules/ess';
 import { supportRoutes } from './modules/support/routes';
+import { landRoutes } from './modules/land';
+import { projectRoutes } from './modules/project';
+import { propertyRoutes } from './modules/property';
 import ModulesSelectorPage from './modules/dashboard/pages/ModulesSelectorPage';
 import RoleBasedRedirect from './shared/components/auth/RoleBasedRedirect';
 import { AuthProvider } from './shared/context/contexts/AuthContext';
@@ -37,6 +40,9 @@ const router = createBrowserRouter([
   ...aIRoutes,
   ...employeeSelfServiceRoutes,
   ...supportRoutes,
+  ...landRoutes,
+  ...projectRoutes,
+  ...propertyRoutes,
   {
     path: '/admin/modules',
     element: <ModulesSelectorPage />,

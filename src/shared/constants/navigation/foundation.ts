@@ -25,13 +25,11 @@ export const foundationNavigation: SidebarNavItem[] = [
     group: 'User Management',
     icon: Users,
     items: [
-      { name: 'Users', path: '/admin/users/list', icon: UserCircle },
-      { name: 'Roles', path: '/admin/users/roles', icon: ShieldCheck },
-      { name: 'Permissions', path: '/admin/users/permissions', icon: Key },
-      { name: 'User Groups', path: '/admin/users/groups', icon: Users },
-      { name: 'Login History', path: '/admin/users/login-history', icon: Clock },
-      { name: 'Active Sessions', path: '/admin/users/active-sessions', icon: Activity },
-      { name: 'Activity Logs', path: '/admin/users/activity-logs', icon: FileText },
+      { name: 'Dashboard', path: '/administration/access/dashboard', icon: UserCircle },
+      { name: 'Users', path: '/administration/access/users', icon: Users },
+      { name: 'Login History', path: '/administration/access/login-history', icon: Clock },
+      { name: 'Activity Logs', path: '/administration/access/activity-logs', icon: FileText },
+      { name: 'Reports', path: '/administration/access/reports', icon: Activity },
     ]
   }
 ];

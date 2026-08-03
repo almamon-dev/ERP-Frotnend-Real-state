@@ -2,7 +2,7 @@ import { RouteObject, Navigate } from 'react-router-dom';
 import { dashboardRoutes } from './Dashboard';
 import { analyticsRoutes } from './Analytics';
 import { reportsRoutes } from './Reports';
-import { accessManagementRoutes } from './UserManagement/AccessManagement_routes';
+import { userManagementRoutes } from './UserManagement';
 import { organizationRoutes } from './CompanySetup';
 import { masterDataRoutes } from './MasterData';
 import { securityRoutes } from './Security';
@@ -16,6 +16,9 @@ import DepartmentsPage from './CompanySetup/Departments/pages/DepartmentsPage';
 import DesignationsPage from './CompanySetup/Designations/pages/DesignationsPage';
 import TeamsPage from './CompanySetup/Teams/pages/TeamsPage';
 import MasterDataPage from './MasterData/pages/MasterDataPage';
+import RolesPage from './UserManagement/Roles/pages/RolesPage';
+import CreateRolePage from './UserManagement/Roles/pages/Create';
+import UserGroupsPage from './UserManagement/UserGroups/pages/UserGroupsPage';
 
 export const administrationRoutes: RouteObject[] = [
   {
@@ -50,6 +53,22 @@ export const administrationRoutes: RouteObject[] = [
         path: 'core/master-data',
         element: <MasterDataPage />,
       },
+      {
+        path: 'users/roles',
+        element: <RolesPage />,
+      },
+      {
+        path: 'users/roles/create',
+        element: <CreateRolePage />,
+      },
+      {
+        path: 'users/permissions',
+        element: <Navigate to="../users/roles" replace />,
+      },
+      {
+        path: 'users/groups',
+        element: <UserGroupsPage />,
+      },
     ],
   },
   {
@@ -77,8 +96,8 @@ export const administrationRoutes: RouteObject[] = [
         children: masterDataRoutes,
       },
       {
-        path: 'access',
-        children: accessManagementRoutes,
+        path: 'access/*',
+        children: userManagementRoutes,
       },
       {
         path: 'organization',
